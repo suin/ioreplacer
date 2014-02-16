@@ -1,3 +1,4 @@
+// Package ioreplacer replaces I/O.
 package ioreplacer
 
 import (
@@ -6,6 +7,9 @@ import (
 	"sort"
 )
 
+// Reader replaces input.
+// As ioreplacer.Reader implements io.Reader interface, 
+// it works with any functions which require io.Reader like os.File, bufio.Reader, io.Copy and so on. 
 type Reader struct {
 	BufferSize                 int
 	source                     io.Reader
@@ -15,6 +19,7 @@ type Reader struct {
 	err                        error
 }
 
+// source must be a io.Reader. replaceMap is a key-value pair of a string be replaced from and a string be replaced to.
 func NewReader(source io.Reader, replaceMap map[string]string) *Reader {
 	newReplaceMap := [][][]byte{}
 
